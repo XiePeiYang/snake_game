@@ -1,0 +1,5 @@
+"common.obj",
+"main.obj",
+"snake.obj" 
+TO "sss" 
+RAMSIZE(256) 

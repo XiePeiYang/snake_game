@@ -1,0 +1,87 @@
+C51 COMPILER V9.02   SNAKE                                                                 03/08/2015 22:57:55 PAGE 1   
+
+
+C51 COMPILER V9.02, COMPILATION OF MODULE SNAKE
+OBJECT MODULE PLACED IN snake.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE snake.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<stdlib.h>
+   2          #include"snake.h"
+   3          #include"common.h"
+   4          
+   5          void add(unsigned char snake[8],unsigned char x,unsigned char y)
+   6          {
+   7   1              if(eat(snake,x,y))
+   8   1                      fail();
+   9   1              else
+  10   1                      snake[y] |= 1 << x;     
+  11   1      }
+  12          
+  13          void remove(unsigned char snake[8],unsigned char* x_tail,unsigned char* y_tail,unsigned char direction)
+  14          {
+  15   1              snake[*x_tail] &= ~(1 << *y_tail);
+  16   1              switch(direction)
+  17   1              {
+  18   2                      case 1: if((*y_tail) == 7)
+  19   2                                              *y_tail = 0;
+  20   2                                      else
+  21   2                                              (*y_tail)++;
+  22   2                                      break;
+  23   2                      case 2: if((*y_tail) == 0)
+  24   2                                              *y_tail = 7;
+  25   2                                      else
+  26   2                                              (*y_tail)--;
+  27   2                                      break;
+  28   2                      case 3: if((*x_tail) == 0)
+  29   2                                              *x_tail = 7;
+  30   2                                      else
+  31   2                                              (*x_tail)--;
+  32   2                                      break;
+  33   2                      case 4: if((*x_tail) == 7)
+  34   2                                              *x_tail = 0;
+  35   2                                      else
+  36   2                                              (*x_tail)++;
+  37   2                                      break;
+  38   2              }       
+  39   1      }
+  40          
+  41          void get_food(unsigned char* x,unsigned char* y)
+  42          {
+  43   1              *x = rand()%7;
+  44   1              *y = rand()%7;  
+  45   1      }
+  46          
+  47          int eat(const unsigned char snake[8],const unsigned char x,const unsigned char y)
+  48          {
+  49   1              unsigned char j = snake[y] & (1 << x);
+  50   1              if(j == (1 << x))
+  51   1                      return 1;
+  52   1              else
+  53   1                      return 0;
+  54   1      }
+  55          
+C51 COMPILER V9.02   SNAKE                                                                 03/08/2015 22:57:55 PAGE 2   
+
+  56          void fail()
+  57          {
+  58   1              unsigned char fail_word[8] = {0,0,32,0,24,36,0,0};
+  59   1              while(1)
+  60   1                      light(fail_word,2,2);
+  61   1      }
+  62          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    345    ----
+   CONSTANT SIZE    =      8    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      34
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

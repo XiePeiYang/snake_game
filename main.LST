@@ -1,0 +1,110 @@
+C51 COMPILER V9.02   MAIN                                                                  03/08/2015 22:57:54 PAGE 1   
+
+
+C51 COMPILER V9.02, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #include "common.h"
+   3          #include "snake.h"
+   4          
+   5          void main()
+   6          {
+   7   1              while(1)
+   8   1              {
+   9   2                      unsigned char snake[8] = {0};
+  10   2                      unsigned char x_head = 0,y_head = 0;
+  11   2                      unsigned char x_tail = 0,y_tail = 0;
+  12   2                      unsigned char dire[64] = {0};
+  13   2                      unsigned dire_i = 0,dire_del = 0;
+  14   2                      b_value now_b = none,prev_b = right;
+  15   2                      unsigned char food_x,food_y;
+  16   2                      while(1)
+  17   2                      {
+  18   3                              get_food(&food_x,&food_y);
+  19   3                              if(!eat(snake,food_x,food_y))break;
+  20   3                      }
+  21   2      
+  22   2                      snake[0] = 1;
+  23   2      
+  24   2                      while(1)
+  25   2                      {
+  26   3                              now_b = button();
+  27   3      
+  28   3                              if(now_b == ok)
+  29   3                                      break;
+  30   3                              if(now_b == left||now_b == right||now_b == up||now_b == down)
+  31   3                                      if((now_b == up&&prev_b != down)||(now_b == down&&prev_b != up)||(now_b == left&&prev_b != right)||(no
+             -w_b == right&&prev_b != left))
+  32   3                                              prev_b = now_b;
+  33   3                              switch(prev_b)
+  34   3                              {
+  35   4                                      case right: if(x_head == 7)
+  36   4                                                                      x_head = 0;
+  37   4                                                              else
+  38   4                                                                      x_head++;
+  39   4                                                              add(snake,x_head,y_head);
+  40   4                                                              dire[dire_i++] = 1;
+  41   4                                                              break;
+  42   4                                      case left:  if(x_head == 0)
+  43   4                                                                      x_head = 7;
+  44   4                                                              else
+  45   4                                                                      x_head--;
+  46   4                                                              add(snake,x_head,y_head);
+  47   4                                                              dire[dire_i++] = 2;
+  48   4                                                              break;
+  49   4                                      case up:    if(y_head == 0)
+  50   4                                                                      y_head = 7;
+  51   4                                                              else
+  52   4                                                                      y_head--;
+  53   4                                                              add(snake,x_head,y_head);
+  54   4                                                              dire[dire_i++] = 3;
+C51 COMPILER V9.02   MAIN                                                                  03/08/2015 22:57:54 PAGE 2   
+
+  55   4                                                              break;
+  56   4                                      case down:  if(y_head == 7)
+  57   4                                                                      y_head = 0;
+  58   4                                                              else
+  59   4                                                                      y_head++;
+  60   4                                                              add(snake,x_head,y_head);
+  61   4                                                              dire[dire_i++] = 4;
+  62   4                                                              break; 
+  63   4                              }
+  64   3      
+  65   3                              if(!eat(snake,food_x,food_y)) 
+  66   3                                      remove(snake,&x_tail,&y_tail,dire[dire_del++]);
+  67   3                              else
+  68   3                              {
+  69   4                                      while(1)
+  70   4                                      {
+  71   5                                              get_food(&food_x,&food_y);
+  72   5                                              if(!eat(snake,food_x,food_y))break;
+  73   5                                      }       
+  74   4                              }
+  75   3      
+  76   3                              light(snake,food_x,food_y);
+  77   3                              
+  78   3                              if(dire_i == 64)
+  79   3                                      dire_i = 0;
+  80   3                              if((dire_del) == 64)
+  81   3                                      dire_del = 0;
+  82   3                      }               
+  83   2              }
+  84   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    503    ----
+   CONSTANT SIZE    =     72    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      84
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
