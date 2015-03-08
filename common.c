@@ -1,5 +1,5 @@
 /////////////////////////////////
-// created at 2015.3.6 by Yang
+// created at 2015.3.7 by Yang
 ////////////////////////////////
 #include<reg51.h>
 #include<intrins.h>
@@ -74,7 +74,7 @@ b_value button()
 		if(GPIO_KEY!=0x0f)
 		{
 			
-			//≤‚ ‘¡–
+			//¬≤√¢√ä√î√Å√ê
 			GPIO_KEY=0X0F;
 			switch(GPIO_KEY)
 			{
@@ -83,7 +83,7 @@ b_value button()
 				case(0X0d): KeyValue=2;break;
 				case(0X0e):	KeyValue=3;break;
 			}
-			//≤‚ ‘––
+			//¬≤√¢√ä√î√ê√ê
 			GPIO_KEY=0XF0;
 			switch(GPIO_KEY)
 			{
