@@ -1,5 +1,5 @@
 //////////////////////////////////////
-//created at 2015.3.6 by Yang
+//created at 2015.3.7 by Yang
 /////////////////////////////////////
 #include<reg51.h>
 #include "common.h"
