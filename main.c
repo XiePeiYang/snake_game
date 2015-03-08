@@ -1,3 +1,6 @@
+//////////////////////////////////////
+//created at 2015.3.6 by Yang
+/////////////////////////////////////
 #include<reg51.h>
 #include "common.h"
 #include "snake.h"
@@ -59,10 +62,10 @@ void main()
 								y_head++;
 							add(snake,x_head,y_head);
 							dire[dire_i++] = 4;
-							break; 
+							break;
 			}
 
-			if(!eat(snake,food_x,food_y)) 
+			if(!eat(snake,food_x,food_y))
 				remove(snake,&x_tail,&y_tail,dire[dire_del++]);
 			else
 			{
@@ -70,15 +73,15 @@ void main()
 				{
 					get_food(&food_x,&food_y);
 					if(!eat(snake,food_x,food_y))break;
-				}	
+				}
 			}
 
 			light(snake,food_x,food_y);
-			
+
 			if(dire_i == 64)
 				dire_i = 0;
 			if((dire_del) == 64)
 				dire_del = 0;
-		}		
+		}
 	}
 }
