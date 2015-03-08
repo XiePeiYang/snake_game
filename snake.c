@@ -1,3 +1,6 @@
+//////////////////////////////////
+//created at 2015.3.6 by Yang
+//////////////////////////////////
 #include<stdlib.h>
 #include"snake.h"
 #include"common.h"
